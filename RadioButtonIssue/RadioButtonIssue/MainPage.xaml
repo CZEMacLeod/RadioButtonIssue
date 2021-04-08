@@ -14,18 +14,6 @@
             <vm:EqualConverter x:Key="EqualConverter1"
                                x:TypeArguments="sys:UInt32" />
             <vm:EqualConverter x:Key="EqualConverter2" />
-            <vm:StringEqualConverter x:Key="StringEqualConverter1">
-                <x:Arguments>
-                    <sys1:StringComparison>InvariantCultureIgnoreCase</sys1:StringComparison>
-                </x:Arguments>
-            </vm:StringEqualConverter>
-
-            <vm:StringEqualConverter x:Key="StringEqualConverter2"
-                                     Comparer="{x:Static sys1:StringComparer.InvariantCultureIgnoreCase}" />
-
-            <vm:EqualConverter x:Key="StringEqualConverter3"
-                               x:TypeArguments="sys:String"
-                               Comparer="{x:Static sys1:StringComparer.InvariantCultureIgnoreCase}" />
 
             <sys:UInt32 x:Key="Ch1">1</sys:UInt32>
             <sys:UInt32 x:Key="Ch2">2</sys:UInt32>
@@ -92,7 +80,6 @@
                 <Setter Property="VerticalOptions"
                         Value="Center" />
             </Style>
-            <x:String x:Key="MyText">I Woz Ere</x:String>
         </StackLayout.Resources>
 
         <Grid ColumnDefinitions="Auto,*,*,*,*,*,*,*,*"
@@ -191,14 +178,6 @@
                          IsChecked="{Binding Channel, Converter={StaticResource EqualConverter2}, ConverterParameter={StaticResource Ch8},Mode=OneWay}"
                          Value="{StaticResource Ch8}" />
         </Grid>
-        <Label Text="{StaticResource MyText}" />
-        <Entry Text="{Binding EnteredCode}" />
-        <Label Text="Matched1"
-               IsVisible="{Binding EnteredCode, Converter={StaticResource StringEqualConverter1}, ConverterParameter={StaticResource MyText},Mode=OneWay}" />
-        <Label Text="Matched2"
-               IsVisible="{Binding EnteredCode, Converter={StaticResource StringEqualConverter2}, ConverterParameter={StaticResource MyText},Mode=OneWay}" />
-        <Label Text="Matched3"
-               IsVisible="{Binding EnteredCode, Converter={StaticResource StringEqualConverter3}, ConverterParameter={StaticResource MyText},Mode=OneWay}" />
     </StackLayout>
 
 </ContentPage>
