@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RadioButtonIssue.MainPage"
+             xmlns:vm="clr-namespace:RadioButtonIssue"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:sys1="clr-namespace:System;assembly=netstandard"
+             xmlns:sys2="clr-namespace:System.Collections.Generic;assembly=System.Runtime"
+             x:DataType="vm:MainPageViewModel">
+
+    <StackLayout>
+        <StackLayout.Resources>
+            <vm:EqualConverter x:Key="EqualConverter1"
+                               x:TypeArguments="sys:UInt32" />
+            <vm:EqualConverter x:Key="EqualConverter2" />
+            <vm:StringEqualConverter x:Key="StringEqualConverter1">
+                <x:Arguments>
+                    <sys1:StringComparison>InvariantCultureIgnoreCase</sys1:StringComparison>
+                </x:Arguments>
+            </vm:StringEqualConverter>
+
+            <vm:StringEqualConverter x:Key="StringEqualConverter2"
+                                     Comparer="{x:Static sys1:StringComparer.InvariantCultureIgnoreCase}" />
+
+            <vm:EqualConverter x:Key="StringEqualConverter3"
+                               x:TypeArguments="sys:String"
+                               Comparer="{x:Static sys1:StringComparer.InvariantCultureIgnoreCase}" />
+
+            <sys:UInt32 x:Key="Ch1">1</sys:UInt32>
+            <sys:UInt32 x:Key="Ch2">2</sys:UInt32>
+            <sys:UInt32 x:Key="Ch3">3</sys:UInt32>
+            <sys:UInt32 x:Key="Ch4">4</sys:UInt32>
+            <sys:UInt32 x:Key="Ch5">5</sys:UInt32>
+            <sys:UInt32 x:Key="Ch6">6</sys:UInt32>
+            <sys:UInt32 x:Key="Ch7">7</sys:UInt32>
+            <sys:UInt32 x:Key="Ch8">8</sys:UInt32>
+            <ControlTemplate x:Key="MyRadioTemplate">
+                <Frame x:Name="frame"
+                       Padding="0"
+                       HasShadow="False"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                       BorderColor="Transparent"
+                       BackgroundColor="Transparent">
+                    <Grid Margin="4">
+                        <Label x:Name="content"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               VerticalTextAlignment="Center"
+                               Text="{TemplateBinding Content}"
+                               FontAttributes="None"
+                               FontSize="Small" />
+                    </Grid>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CheckedStates">
+                                <VisualState x:Name="Checked">
+                                    <VisualState.Setters>
+                                        <Setter TargetName="frame"
+                                                Property="Frame.BorderColor"
+                                                Value="White" />
+                                        <Setter TargetName="content"
+                                                Property="Label.FontAttributes"
+                                                Value="Bold" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <VisualState.Setters>
+                                        <Setter TargetName="frame"
+                                                Property="Frame.BorderColor"
+                                                Value="Transparent" />
+                                        <Setter TargetName="content"
+                                                Property="Label.FontAttributes"
+                                                Value="None" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Frame>
+            </ControlTemplate>
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor"
+                        Value="Black" />
+                <Setter Property="BorderColor"
+                        Value="LightGray" />
+                <Setter Property="CornerRadius"
+                        Value="5" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+            <x:String x:Key="MyText">I Woz Ere</x:String>
+        </StackLayout.Resources>
+
+        <Grid ColumnDefinitions="Auto,*,*,*,*,*,*,*,*"
+              RowDefinitions="Auto"
+              RadioButtonGroup.GroupName="Channel1"
+              RadioButtonGroup.SelectedValue="{Binding Channel}"
+              BackgroundColor="Pink"
+              HorizontalOptions="Fill">
+            <Label Text="Channel:" />
+            <RadioButton Content="1"
+                         Grid.Column="1"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter1}, ConverterParameter={StaticResource Ch1},Mode=OneWay}"
+                         Value="{StaticResource Ch1}" />
+            <RadioButton Content="2"
+                         Grid.Column="2"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter1}, ConverterParameter={StaticResource Ch2},Mode=OneWay}"
+                         Value="{StaticResource Ch2}" />
+            <RadioButton Content="3"
+                         Grid.Column="3"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter1}, ConverterParameter={StaticResource Ch3},Mode=OneWay}"
+                         Value="{StaticResource Ch3}" />
+            <RadioButton Content="4"
+                         Grid.Column="4"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter1}, ConverterParameter={StaticResource Ch4},Mode=OneWay}"
+                         Value="{StaticResource Ch4}" />
+            <RadioButton Content="5"
+                         Grid.Column="5"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter1}, ConverterParameter={StaticResource Ch5},Mode=OneWay}"
+                         Value="{StaticResource Ch5}" />
+            <RadioButton Content="6"
+                         Grid.Column="6"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter1}, ConverterParameter={StaticResource Ch6},Mode=OneWay}"
+                         Value="{StaticResource Ch6}" />
+            <RadioButton Content="7"
+                         Grid.Column="7"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter1}, ConverterParameter={StaticResource Ch7},Mode=OneWay}"
+                         Value="{StaticResource Ch7}" />
+            <RadioButton Content="8"
+                         Grid.Column="8"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter1}, ConverterParameter={StaticResource Ch8},Mode=OneWay}"
+                         Value="{StaticResource Ch8}" />
+        </Grid>
+        <Grid ColumnDefinitions="Auto,*,*,*,*,*,*,*,*"
+              RowDefinitions="Auto"
+              RadioButtonGroup.GroupName="Channel2"
+              RadioButtonGroup.SelectedValue="{Binding Channel}"
+              BackgroundColor="Pink"
+              HorizontalOptions="Fill">
+            <Label Text="Channel:" />
+            <RadioButton Content="1"
+                         Grid.Column="1"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter2}, ConverterParameter={StaticResource Ch1},Mode=OneWay}"
+                         Value="{StaticResource Ch1}" />
+            <RadioButton Content="2"
+                         Grid.Column="2"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter2}, ConverterParameter={StaticResource Ch2},Mode=OneWay}"
+                         Value="{StaticResource Ch2}" />
+            <RadioButton Content="3"
+                         Grid.Column="3"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter2}, ConverterParameter={StaticResource Ch3},Mode=OneWay}"
+                         Value="{StaticResource Ch3}" />
+            <RadioButton Content="4"
+                         Grid.Column="4"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter2}, ConverterParameter={StaticResource Ch4},Mode=OneWay}"
+                         Value="{StaticResource Ch4}" />
+            <RadioButton Content="5"
+                         Grid.Column="5"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter2}, ConverterParameter={StaticResource Ch5},Mode=OneWay}"
+                         Value="{StaticResource Ch5}" />
+            <RadioButton Content="6"
+                         Grid.Column="6"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter2}, ConverterParameter={StaticResource Ch6},Mode=OneWay}"
+                         Value="{StaticResource Ch6}" />
+            <RadioButton Content="7"
+                         Grid.Column="7"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter2}, ConverterParameter={StaticResource Ch7},Mode=OneWay}"
+                         Value="{StaticResource Ch7}" />
+            <RadioButton Content="8"
+                         Grid.Column="8"
+                         ControlTemplate="{StaticResource MyRadioTemplate}"
+                         IsChecked="{Binding Channel, Converter={StaticResource EqualConverter2}, ConverterParameter={StaticResource Ch8},Mode=OneWay}"
+                         Value="{StaticResource Ch8}" />
+        </Grid>
+        <Label Text="{StaticResource MyText}" />
+        <Entry Text="{Binding EnteredCode}" />
+        <Label Text="Matched1"
+               IsVisible="{Binding EnteredCode, Converter={StaticResource StringEqualConverter1}, ConverterParameter={StaticResource MyText},Mode=OneWay}" />
+        <Label Text="Matched2"
+               IsVisible="{Binding EnteredCode, Converter={StaticResource StringEqualConverter2}, ConverterParameter={StaticResource MyText},Mode=OneWay}" />
+        <Label Text="Matched3"
+               IsVisible="{Binding EnteredCode, Converter={StaticResource StringEqualConverter3}, ConverterParameter={StaticResource MyText},Mode=OneWay}" />
+    </StackLayout>
+
+</ContentPage>
